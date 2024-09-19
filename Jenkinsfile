@@ -26,7 +26,10 @@ pipeline {
                 }
             }
         }
-
+        environment {
+            DOCKER_IMAGE = "sudheer99123/my-maven-app" // Update with your Docker Hub username
+            DOCKER_TAG = "latest" // or any specific tag you want
+        }
         stage('Push Docker Image') {
             steps {
                 script {
