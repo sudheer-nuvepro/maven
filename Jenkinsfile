@@ -42,7 +42,7 @@ pipeline {
                 sh '''
                     docker stop my-maven-app || true
                     docker rm my-maven-app || true
-                    docker run -d -p 8080:8080 --name my-maven-app ${DOCKER_IMAGE}:${DOCKER_TAG}
+                    docker run -d -p 8081:8080 --name my-maven-app ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
             }
         }
