@@ -20,7 +20,7 @@ pipeline {
         }
         stage('test docker Project') {
             steps {
-                sh 'docker --version'
+                sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
             }
         }
 
