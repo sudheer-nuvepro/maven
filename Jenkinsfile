@@ -20,7 +20,7 @@ pipeline {
         }
         stage('test docker Project') {
             steps {
-                sh 'docker ps'
+                sh 'whoami'
             }
         }
 
