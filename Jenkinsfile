@@ -18,39 +18,44 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-
-        stage('Build Docker Image') {
+        stage('test docker Project') {
             steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
-                }
+                sh 'docker --version'
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
-                    }
-                }
-            }
-        }
+//         stage('Build Docker Image') {
+//             steps {
+//                 script {
+//                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+//                 }
+//             }
+//         }
 
-        stage('Deploy Docker Container') {
-            steps {
-                sh '''
-                    docker stop my-maven-app || true
-                    docker rm my-maven-app || true
-                    docker run -d -p 8081:8080 --name my-maven-app ${DOCKER_IMAGE}:${DOCKER_TAG}
-                '''
-            }
-        }
-    }
+//         stage('Push Docker Image') {
+//             steps {
+//                 script {
+//                     docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+//                         docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
+//                     }
+//                 }
+//             }
+//         }
 
-    post {
-        always {
-            cleanWs()
-        }
-    }
-}
+//         stage('Deploy Docker Container') {
+//             steps {
+//                 sh '''
+//                     docker stop my-maven-app || true
+//                     docker rm my-maven-app || true
+//                     docker run -d -p 8081:8080 --name my-maven-app ${DOCKER_IMAGE}:${DOCKER_TAG}
+//                 '''
+//             }
+//         }
+//     }
+
+//     post {
+//         always {
+//             cleanWs()
+//         }
+//     }
+// }
